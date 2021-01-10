@@ -1,0 +1,21 @@
+*vim-yolol.txt* Yolol development plugin
+*vim-yolol*
+
+        vim - yolol Reference
+
+===============================================
+
+CONTENTS                       *yolol-contents*
+
+  1. Intro...................|yolol-intro|
+  2. Install.................|yolol-install|
+  3. Commands................|yolol-commands|
+
+===============================================
+INTRO                             *yolol-intro*
+
+===============================================
+INSTALL                         *yolol-install*
+
+===============================================
+COMMANDS                       *yolol-commands*
