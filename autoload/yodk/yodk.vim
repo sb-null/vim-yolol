@@ -9,7 +9,7 @@ function! yodk#fmt#run(bin_name, target)
   if empty(l:cmd)
     return
   endif
-  return go#util#Exec(l:cmd)
+  return yolol#util#Exec(l:cmd)
 endfunction 
 
 " run runs the yodk verify command for the given target file and returns
@@ -19,7 +19,7 @@ function! yodk#verify#run(bin_name, target)
   if empty(l:cmd)
     return
   endif
-  return go#util#Exec(l:cmd)
+  return yolol#util#Exec(l:cmd)
 endfunction 
 
 " run runs the yodk optimize command for the given target file and returns
@@ -29,7 +29,7 @@ function! yodk#optimize#run(bin_name, target)
   if empty(l:cmd)
     return
   endif
-  return go#util#Exec(l:cmd)
+  return yolol#util#Exec(l:cmd)
 endfunction 
 
 " fmt_cmd returns the command to run as a list.

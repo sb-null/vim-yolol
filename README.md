@@ -8,7 +8,7 @@ vim integration for starbase yolol programming language and uses [yodk](https://
 
 This plugin adds yolol language support for Vim:
 
-- (x) Lint your code `YololLint`
+- (x) Format your code `YololFmt`
 - (x) Code optimization using `YololOptimize`
 - (x) Code Testing with `YololTest`
 - (x) compile nolol code into yolol using `Nolol2Yolol`

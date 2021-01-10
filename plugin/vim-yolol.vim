@@ -10,10 +10,9 @@ function! s:checkVersion() abort
 
   if l:unsupported == 1
     echohl Error
-    echom "vim-go requires at least Vim 8.0.1453 or Neovim 0.4.0, but you're using an older version."
-    echom "Please update your Vim for the best vim-go experience."
+    echom "vim-yolol requires at least Vim 8.0.1453 or Neovim 0.4.0, but you're using an older version."
+    echom "Please update your Vim for the best vim-yolol experience."
     echom "If you really want to continue you can set this to make the error go away:"
-    echom "    let g:go_version_warning = 0"
     echom "Note that some features may error out or behave incorrectly."
     echom "Please do not report bugs unless you're using at least Vim 8.0.1453 or Neovim 0.4.0."
     echohl None
@@ -34,7 +33,7 @@ let s:packages = {
 
 " These commands are available on any filetypes
 command! -nargs=* -complete=customlist,s:complete YololInstallBinaries call s:YololInstallBinaries()
-command! -nargs=* -complete=customlist,s:complete YololUpdateBinaries  call s:YololInstallBinaries()  
+command! -nargs=0 YololReportGithubIssue call yolol#issue#New()  
 
 " YololInstallBinaries downloads and installs binaries defined in s:packages to
 " s:packages
@@ -49,7 +48,7 @@ function! s:YololInstallBinaries()
 
   let l:cwd = getcwd()
   let l:binPath = l:cwd . '/bin'
-  " vim's executable path is looking in PATH so add our go_bin path to it
+  " vim's executable path is looking in PATH
   let Restore_path = yolol#util#SetEnv('PATH', l:binPath . ":" . $PATH) 
 
   for [l:name, l:downloadUrl] in items(s:packages)
@@ -79,8 +78,7 @@ endfunction
 
 
 
-" CheckBinaries checks if the necessary binaries to install the Go tool
-" " commands are available.
+" CheckBinaries checks if the necessary binarie ommands are available.
 function! s:CheckBinaries()
   if !executable('curl')
     call yolol#util#EchoError('curl executable not found.')

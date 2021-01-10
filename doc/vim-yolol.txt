@@ -1,21 +1,70 @@
 *vim-yolol.txt* Yolol development plugin
 *vim-yolol*
 
-        vim - yolol Reference
+                         vim - yolol Reference
 
-===============================================
+==============================================================================
+CONTENTS                                                      *yolol-contents*
 
-CONTENTS                       *yolol-contents*
+  1. Intro..........................................|yolol-intro|
+  2. Install........................................|yolol-install|
+  3. Commands.......................................|yolol-commands|
+  4. Syntax Highlighting............................|yolol-syntax|
+  5. Troubleshooting................................|yolol-trouble|
 
-  1. Intro...................|yolol-intro|
-  2. Install.................|yolol-install|
-  3. Commands................|yolol-commands|
+==============================================================================
+INTRO                                                            *yolol-intro*
 
-===============================================
-INTRO                             *yolol-intro*
+==============================================================================
+INSTALL                                                        *yolol-install*
 
-===============================================
-INSTALL                         *yolol-install*
+==============================================================================
+COMMANDS                                                      *yolol-commands*
 
-===============================================
-COMMANDS                       *yolol-commands*
+
+                                                     *:YololReportGithubIssue*
+:YololReportGithubIssue
+
+    YololReportGitHubIssue opens the default browser and starts a new bug 
+    report with useful system information.
+
+
+                                                                   *:YololFmt*
+:YololFmt
+
+    Formats and verifys yolol code using yodk format and yodk verify
+
+
+                                                              *:YololOptimize*
+:YololOptimize
+
+   Optimizes yolol code using yodk optimize
+
+
+                                                                  *:YololTest*
+:YololTest
+   Runs tests using yodk test
+
+
+                                                                *:Nolol2Yolol*
+:Nolol2Yolol
+
+   Converts nolol code to yolol code using yodk compile
+
+
+                                                                 *:YololDebug*
+:YololDebug
+
+   Debug nolol or yolol tests using yodk debug
+
+
+==============================================================================
+SYNTAX HIGHLIGHTING                                             *yolol-syntax*
+
+    vim-yolol comes with syntax highlighting for yolol code and uses
+    yodk langserv as a language server backend to provide error
+    highlighting
+
+==============================================================================
+TROUBLESHOOTING                                                *yolol-trouble*
+

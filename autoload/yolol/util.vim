@@ -147,6 +147,55 @@ function! s:echo(msg, hi)
   echohl None
 endfunction 
 
+" open browser
+function! yolol#util#PlayBrowserCommand() abort
+  if executable('xdg-open')
+    let yolol_play_browser_command = 'xdg-open %URL%'
+  elseif executable('firefox')
+    let yolol_play_browser_command = 'firefox %URL% &'
+  elseif executable('chromium')
+    let yolol_play_browser_command = 'chromium %URL% &'
+  else
+    let yolol_play_browser_command = ''
+  endif
+  return get(g:, 'yolol_play_browser_command', yolol_play_browser_command)
+endfunction  
+
+" open browser
+function! yolol#util#OpenBrowser(url) abort
+  let l:cmd = yolol#util#PlayBrowserCommand()
+  if len(l:cmd) == 0
+    redraw
+    echohl WarningMsg
+    echo "It seems that you don't have general web browser. Open URL below."
+    echohl None
+    echo a:url
+    return
+  endif
+  " if setting starts with a !.
+  if l:cmd =~ '^!'
+    let l:cmd = substitute(l:cmd, '%URL%', '\=escape(shellescape(a:url), "#")', 'g')
+    silent! exec l:cmd
+  elseif cmd =~ '^:[A-Z]'
+    let l:cmd = substitute(l:cmd, '%URL%', '\=escape(a:url,"#")', 'g')
+    exec l:cmd
+  else
+    let l:cmd = substitute(l:cmd, '%URL%', '\=shellescape(a:url)', 'g')
+    call yolol#util#System(l:cmd)
+  endif
+endfunction                                                                                                                                                                                                                                               
+
+" System runs a shell command "str". Every arguments after "str" is passed to stdin.
+function! yolol#util#System(str, ...) abort
+  return call('s:system', [a:str] + a:000)
+endfunction  
+
+" Join joins any number of path elements into a single path, adding a
+" " Separator if necessary and returns the result
+function! yolol#util#Join(...) abort
+  return join(a:000, '/')
+endfunction 
+
 function! yolol#util#EchoSuccess(msg)
   call s:echo(a:msg, 'Function')
 endfunction
