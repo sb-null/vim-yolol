@@ -25,6 +25,8 @@ endfunction
 
 call s:checkVersion()
 
+let s:current_dir = expand('<sfile>:p')
+
 " NOTE(bc): varying the binary name and the tail of the import path does not
 " yet work in module aware mode.
 let s:packages = {
@@ -34,6 +36,7 @@ let s:packages = {
 " These commands are available on any filetypes
 command! -nargs=* -complete=customlist,s:complete YololInstallBinaries call s:YololInstallBinaries()
 command! -nargs=0 YololReportGithubIssue call yolol#issue#New()  
+command! -nargs=0 YololFmt call yolol#yodk#Format()
 
 " YololInstallBinaries downloads and installs binaries defined in s:packages to
 " s:packages
@@ -45,9 +48,9 @@ function! s:YololInstallBinaries()
     return
   endif
 
-
   let l:cwd = getcwd()
-  let l:binPath = l:cwd . '/bin'
+  let l:binPath = s:current_dir[0:-22] . '/bin'
+
   " vim's executable path is looking in PATH
   let Restore_path = yolol#util#SetEnv('PATH', l:binPath . ":" . $PATH) 
 

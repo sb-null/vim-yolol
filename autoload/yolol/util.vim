@@ -2,6 +2,23 @@
 let s:cpo_save = &cpo
 set cpo&vim  
 
+" Get all lines in the buffer as a a list.
+function! yolol#util#GetLines()
+  let buf = getline(1, '$')
+
+  if &encoding != 'utf-8'
+    let buf = map(buf, 'iconv(v:val, &encoding, "utf-8")')
+  endif
+
+    if &l:fileformat == 'dos'
+    " XXX: line2byte() depend on 'fileformat' option.
+    " so if fileformat is 'dos', 'buf' must include '\r'.
+    let buf = map(buf, 'v:val."\r"')
+  endif
+
+  return buf
+endfunction  
+
 " CheckBinPath checks whether the given binary exists or not 
 " and returns the path of the binary,
 function! yolol#util#CheckBinPath(binpath) abort
@@ -123,7 +140,7 @@ endfunction
 function! s:exec(cmd, ...) abort
   let l:bin = a:cmd[0]
   let l:cmd = yolol#util#Shelljoin([l:bin] + a:cmd[1:])
-  call yolol#util#EchoInfo('shell command: ' . l:cmd)
+  "call yolol#util#EchoInfo('shell command: ' . l:cmd)
   let l:out = call('s:system', [l:cmd] + a:000)
   return [l:out, yolol#util#ShellError()]
 endfunction
