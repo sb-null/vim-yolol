@@ -12,6 +12,7 @@ This plugin adds yolol language support for Vim:
 - Code optimization using `YololOptimize`
 - compile nolol code into yolol using `Nolol2Yolol`
 - Run tests with `YololTest`
+- autoformat your yolol code
 
 # Todo
 
