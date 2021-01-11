@@ -37,6 +37,10 @@ let s:packages = {
 command! -nargs=* -complete=customlist,s:complete YololInstallBinaries call s:YololInstallBinaries()
 command! -nargs=0 YololReportGithubIssue call yolol#issue#New()  
 command! -nargs=0 YololFmt call yolol#yodk#Format()
+command! -nargs=0 YololOptimize call yolol#yodk#Optimize()
+command! -nargs=0 YololTest call yolol#yodk#Test()
+"command! -nargs=0 YololDebug call yolol#yodk#Debug()
+command! -nargs=0 Nolol2Yolol call yolol#yodk#Compile()
 
 " YololInstallBinaries downloads and installs binaries defined in s:packages to
 " s:packages
