@@ -97,6 +97,14 @@ function! s:CheckBinaries()
   endif
 endfunction
 
+augroup vim-yolol
+
+  " this keeps track of optimize command, if code is optimized it does not do
+  " formating until formating is called using YololFmt
+  autocmd BufWritePre *.yolol call yolol#yodk#AutoFormat()
+
+augroup end
+
 " don't spam the user when Vim is started in Vi compatibility mode
 let s:cpo_save = &cpo
 set cpo&vim  

@@ -5,7 +5,16 @@ set cpo&vim
 let s:current_dir = expand('<sfile>:p:h')
 let s:yodkPath = s:current_dir[0:-15] . "/bin/yodk"
 
+let s:optimized = 1
+
+function! yolol#yodk#AutoFormat() abort
+  if s:optimized == 1
+     call yolol#yodk#Format() 
+  endif
+endfunction
+
 function! yolol#yodk#Format() abort
+  let s:optimized = 1
   let l:curw = winsaveview()
 
   " Write current unsaved buffer to a temp file
@@ -13,9 +22,8 @@ function! yolol#yodk#Format() abort
   call writefile(yolol#util#GetLines(), l:tmpname)
 
   let current_col = col('.')
-  let [l:out, l:err] = yolol#yodk#fmt(s:yodkPath, l:tmpname)
-  let line_offset = len(readfile(l:tmpname)) - line('$')
   let l:orig_line = getline('.')
+  let [l:out, l:err] = yolol#yodk#fmt(s:yodkPath, l:tmpname)
 
   if l:err == 1
     return
@@ -40,6 +48,7 @@ function! yolol#yodk#Format() abort
 endfunction
 
 function! yolol#yodk#Optimize() abort
+  let s:optimized = 0
   let l:curw = winsaveview()
 
   " Write current unsaved buffer to a temp file
@@ -50,9 +59,15 @@ function! yolol#yodk#Optimize() abort
   call writefile(yolol#util#GetLines(), l:tmpfile)
 
   let current_col = col('.')
-  let [l:out, l:err] = yolol#yodk#optimize(s:yodkPath, l:tmpfile)
-  let line_offset = len(readfile(l:tmpfile_optimized)) - line('$')
   let l:orig_line = getline('.')
+  let [l:out, l:err] = yolol#yodk#optimize(s:yodkPath, l:tmpfile)
+
+  if l:err == 1
+    return
+  end
+
+  let [l:out, l:err] = yolol#yodk#verify(s:yodkPath, l:tmpfile_optimized)
+  let line_offset = len(readfile(l:tmpfile_optimized)) - line('$')
 
   if l:err == 0
     call yolol#yodk#update_file(l:tmpfile_optimized, expand('%'))
